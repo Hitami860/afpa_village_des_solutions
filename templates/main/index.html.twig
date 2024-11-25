@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Village des Solutions - Accueil
+{% endblock %}
+
+{% block body %}
+
+
+	<section>
+
+		<p class="text-yellow-400 font-bold">A propos...</p>
+		<p>Le Village est un tiers-lieu unique d'insertion sociale et professionnelle ouvert à tous et favorisant la coopération enter les acteurs du territoire</p>
+		<p>Un <span class="text-orange-500 font-bold">Village des solutions</span> est, de ce fait, un <span class="font-bold">tiers-lieu d'innovation sociale</span> et d'assemblage de solutions, <span class="font-bold">ouvert aux partenaires</span> et qui se caractérisent notamment par :</p>
+		<div class="text-orange-500 font-bold">Des partenariats aux services de l'accompagnement des parcours</div>
+		<div>Co-construction de solution avec les partenaires pour accompagner les publics en insertion faca à leurs problématiques clés : santé, mobilité, logement, parentalité, numérique</span></div>
+		<img src="{{asset('images/partnershiplogo.png')}}" class="border rounded-full border-orange-500" alt="partnership logo">
+
+		<div class="text-orange-500 font-bold">Un conseil de village</div>
+		<div>Le conseil du village a lieu <span class="font-semibold">tous les trimestres</span> et rassemble <span class="font-semibold">tous les usagers du Village</span>: partenaires,publics, Afpa, entreprises, acteurs institutionnels etc.</div>
+		<img src="{{asset('images/meetinglogo.png')}}" class="border rounded-full border-orange-500" alt="meeting logo">
+
+
+		<div class="text-orange-500 font-bold">L'accueil des partenaires en réidence</div>
+		<div>Mise à disposition de locaux sur le Village pour <span class="font-semibold">l'installation ponctuelle ou permanentes</span> des partenaires sur place.</div>
+		<img src="{{asset('images/homeworklogo.png')}}" class="border rounded-full border-orange-500" alt="home work logo">
+
+
+		<div class="text-orange-500 font-bold">Un incubateur de solutions</div>
+		<div>L'incabuteur des solutions est un dispositif innovant <span class="font-semibold">d'ingénierie de réponse à des appels à projet</span> du territoire en consortium.</div>
+		<img src="{{asset('images/reflexionlogo.png')}}" class="border rounded-full border-orange-500" alt="reflexion logo">
+
+
+	</section>
+	<section>
+
+		<p class="font-bold">Une vocation à repondre aux problématiques d'insertion socioprofessionnelles sur le territoire...</p>
+		<div>
+		<p class="font-semibold">Le monde de l'insertion sociale et professionnelle est confronté à des enjeux... </p>
+		<ul>
+		<li class="text-[#b5d997] font-semibold">Des freins périphériques à l'emploi</li>
+		<img src="{{asset('images/firedlogo.png')}}" alt="fired logo ">
+		<li class="text-gray-500 font-semibold">Des difficultés de mise en relation entre l'offre et la demande de formation professionnelle</li>
+		<img src="{{asset('images/linklogo.png')}}" alt="link logo ">
+		<li class="text-orange-500 font-semibold">Un besoin des acteurs de l'insertion professionnelle de se rapprocher et de travailler en écosystème</li>
+		<img src="{{asset('images/ecosystemlogo.png')}}" alt="ecosystem logo ">
+		</ul>
+		</div>
+
+		<div>
+		<p class="font-semibold">... auxquels les Villages des solutions répondent sur chaque territoire</p>
+		<ul>
+		<li class="text-[#b5d997] font-semibold">Un accompagnement des parcours de vie des publics sur les principaux freins à l'emploi</li>
+		<img src="{{asset('images/puzzlelogo.png')}}" alt="puzzle logo ">
+		<li class="text-gray-500 font-semibold">Des lieux ouverts à tous acceuillant une pluralité d'acteurs</li>
+		<img src="{{asset('images/socialspacelogo.png')}}" alt="social spaces logo ">
+		<li class="text-orange-500 font-semibold">Des lieux collaboratifs de rencontres et d'échanges</li>
+		<img src="{{asset('images/sociallinklogo.png')}}" alt="social link logo ">
+		</ul>
+		</div>
+
+	</section>
+	<section>
+
+		<p class="font-bold">les thèmes et problématiques clés...</p>
+		<p>Tout au long de son parcours, une personne peut etre confrontée à des <span class="font-bold">problématiques</span> qui peuvent faire échouer son insertion. Ces problématiques sont de nature plurielle:
+		</p>
+		<div>
+        {% for problema in problematics %}
+		<div class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+  <div class="p-4">
+    <h5 class="mb-2 text-slate-800 text-xl font-semibold border  uppercase ">
+      {{problema.name}}
+    </h5>
+    <p class="text-slate-600 leading-normal font-light">
+      {{problema.description}}
+    </p>
+
+  </div>
+</div>
+{% endfor %}
+		</div>
+		<p class="text-gray-500 font-semibold">La mission principale du Village sera d'apporter des réponses à ces freins afin d'améliorer les parcours d'insertion des publics sur le territoire
+		</p>
+	</section>
+	<section>
+
+		<p class="font-bold">Panorama des solutions actuellement déployées sur le Village de Chatellerault</p>
+		<div></div>
+
+	</section>
+	<section>
+
+		<p>Mur des partenaires</p>
+		<div></div>
+
+	</section>
+
+	<section>
+
+		<p>Vous avez des questions ou vous avez besoin de renseignements supplémentaires ?
+			<a href="">
+				<span class="text-gray-500 font-semibold">Contactez-nous :</span>
+			</a>
+		</p>
+		<div></div>
+
+	</section>
+
+{% endblock %}
