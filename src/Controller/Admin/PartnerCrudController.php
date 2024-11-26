@@ -23,7 +23,8 @@ class PartnerCrudController extends AbstractCrudController
         return [
             TextField::new('name'),
             TextEditorField::new('description'),
-            TextField::new('logo'),
+            ImageField::new('logo')
+            ,
             AssociationField::new('categories')
             ->setLabel('Catégory')
             ->setFormTypeOptions([
