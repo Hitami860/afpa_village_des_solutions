@@ -2,35 +2,37 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Partner;
+use App\Entity\Interventions;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class PartnerCrudController extends AbstractCrudController
+class InterventionsCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Partner::class;
+        return Interventions::class;
     }
 
     
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name'),
+            TextField::new('title'),
             TextEditorField::new('description'),
-            TextField::new('logo'),
-            AssociationField::new('categories')
-            ->setLabel('Catégory')
+            DateTimeField::new('date'),
+            DateTimeField::new('enddate'),
+            AssociationField::new('partner')
+            ->setLabel('Partner')
             ->setFormTypeOptions([
                 'by_reference' => true,
                 'multiple' => false,  
             ])
             ->setRequired(true)
+
         ];
     }
     

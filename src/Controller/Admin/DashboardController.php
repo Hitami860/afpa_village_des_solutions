@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Categories;
+use App\Entity\Interventions;
 use App\Entity\Partner;
 use App\Entity\Problematic;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -46,5 +47,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Problematic', 'fas fa-list', Problematic::class);
         yield MenuItem::linkToCrud('Partner', 'fas fa-list', Partner::class);
         yield MenuItem::linkToCrud('Categories', 'fas fa-list', Categories::class);
+        yield MenuItem::linkToCrud('Interventions', 'fas fa-list', Interventions::class);
     }
 }

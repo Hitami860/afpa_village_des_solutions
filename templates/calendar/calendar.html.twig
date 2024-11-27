@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier - Village des Solutions{% endblock %}
+
+{% block body %}
+
+<p class="text-xl font-semibold text-center pt-[7%]">Agenda des interventions des partenaires du village</p>
+
+<div class="pt-[5%] pb-[3%]">
+<div class="container mx-auto bg-white " id="calendar"></div>
+</div>
+
+
+
+<script src="/calendar.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/index.global.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/index.global.min.js'></script>
+
+{% endblock %}

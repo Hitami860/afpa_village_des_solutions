@@ -34,6 +34,10 @@ class Partner
     #[ORM\OneToMany(targetEntity: Interventions::class, mappedBy: 'partner')]
     private Collection $interventions;
 
+    public function __tostring() {
+        return $this->name;
+    }
+
     /**
      * @var Collection<int, Activities>
      */

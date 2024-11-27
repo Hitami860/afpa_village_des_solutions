@@ -26,6 +26,9 @@ class Interventions
     #[ORM\ManyToOne(inversedBy: 'interventions')]
     private ?Partner $partner = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $enddate = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Interventions
     public function setPartner(?Partner $partner): static
     {
         $this->partner = $partner;
+
+        return $this;
+    }
+
+    public function getEnddate(): ?\DateTimeInterface
+    {
+        return $this->enddate;
+    }
+
+    public function setEnddate(?\DateTimeInterface $enddate): static
+    {
+        $this->enddate = $enddate;
 
         return $this;
     }
