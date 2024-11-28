@@ -44,6 +44,9 @@ class Partner
     #[ORM\OneToMany(targetEntity: Activities::class, mappedBy: 'partner')]
     private Collection $activities;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $website = null;
+
     public function __construct()
     {
         $this->interventions = new ArrayCollection();
@@ -159,6 +162,18 @@ class Partner
                 $activity->setPartner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(?string $website): static
+    {
+        $this->website = $website;
 
         return $this;
     }
