@@ -1,62 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-	{{partners.name}}- Village des solutions
-{% endblock %}
+{% block title %}{{ partners.name }} - Village des solutions{% endblock %}
 
 {% block body %}
+<div class="container mx-auto py-12 px-6">
 
-	<h2 class="pt-[7%] text-center uppercase font-semibold">{{partners.name}}</h2>
+    <!-- Titre du partenaire -->
+    <h2 class="text-4xl font-semibold text-center text-gray-800 uppercase">{{ partners.name }}</h2>
+   
+    <!-- Logo du partenaire (si disponible) -->
+    {% if partners.logo %}
+        <div class="flex justify-center mt-6">
+            <img src="{{ asset(partners.logo) }}" class="h-24" alt="Logo de {{ partners.name }}">
+        </div>
+    {% endif %}
 
-	{% if partners.logo %}
-		<img src="{{ asset(partners.logo) }}" class="h-16" alt="Logo">
-	{% endif %}
+    <!-- Description du partenaire -->
+    <div class="mt-8 bg-gray-100 p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold text-gray-800">Présentation</h3>
+        <p class="mt-4 text-gray-700">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut metus nec nulla tempor fringilla. Nulla facilisi. Integer sit amet magna nec purus aliquam tincidunt. Sed ut turpis auctor, ullamcorper libero at, auctor odio. Fusce fringilla orci vitae risus convallis, ac faucibus elit pellentesque. Nam ut nunc eget sapien efficitur sodales.
+        </p>
+    </div>
 
-	<section>
-		<h2 class="font-semibold text-xl">Présentation</h2>
-		<div>
-			Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
-		</div>
-	</section>
-
-	<section>
-		<h2 class="font-semibold text-xl">Les activités de ce partenaire</h2>
-		<ul>
-        <li></li>
-        <li></li>
-        <li></li>
+    <!-- Activités du partenaire -->
+    <div class="mt-8 bg-blue-50 p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold text-gray-800">Activités proposées</h3>
+        <ul class="list-disc pl-6 mt-4 text-gray-700">
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Nulla facilisi. Integer sit amet magna nec purus aliquam tincidunt.</li>
+            <li>Fusce fringilla orci vitae risus convallis, ac faucibus elit pellentesque.</li>
+            <li>Nam ut nunc eget sapien efficitur sodales.</li>
         </ul>
-	</section>
+    </div>
 
-	<section>
-		<h2 class="font-semibold text-xl">Les prochaines interventions</h2>
-		<table class="table-fixed">
-  <thead>
-    <tr>
-      <th>Song</th>
-      <th>Artist</th>
-      <th>Year</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-      <td>Malcolm Lockyer</td>
-      <td>1961</td>
-    </tr>
-    <tr>
-      <td>Witchy Woman</td>
-      <td>The Eagles</td>
-      <td>1972</td>
-    </tr>
-    <tr>
-      <td>Shining Star</td>
-      <td>Earth, Wind, and Fire</td>
-      <td>1975</td>
-    </tr>
-  </tbody>
-</table>
-	</section>
+    <!-- Horaires des interventions -->
+    <div class="mt-8 bg-green-50 p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold text-gray-800">Dates et heures de ses interventions</h3>
+        <table class="min-w-full mt-4 table-auto">
+            <thead>
+                <tr class="text-left border-b-2 border-gray-300">
+                    <th class="px-4 py-2 text-gray-800">Date</th>
+                    <th class="px-4 py-2 text-gray-800">Heure</th>
+                    <th class="px-4 py-2 text-gray-800">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b border-gray-200">
+                    <td class="px-4 py-2 text-gray-700">1er Décembre 2024</td>
+                    <td class="px-4 py-2 text-gray-700">10:00 - 12:00</td>
+                    <td class="px-4 py-2 text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                    <td class="px-4 py-2 text-gray-700">5 Décembre 2024</td>
+                    <td class="px-4 py-2 text-gray-700">14:00 - 16:00</td>
+                    <td class="px-4 py-2 text-gray-700">Fusce fringilla orci vitae risus convallis, ac faucibus elit pellentesque.</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 text-gray-700">10 Décembre 2024</td>
+                    <td class="px-4 py-2 text-gray-700">09:00 - 11:00</td>
+                    <td class="px-4 py-2 text-gray-700">Nam ut nunc eget sapien efficitur sodales.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
+    {% if partners.website %}
+<div class="flex justify-center pt-5">
+<a href="{{partners.website}}">
+<button class="border bg-orange-500 text-white rounded-lg  px-[2%] font-semibold border-white hover:bg-orange-400">Visiter le site du partenaire  >></button>
+</a>
+</div>
+{% endif %}
 
+</div>
 {% endblock %}
+

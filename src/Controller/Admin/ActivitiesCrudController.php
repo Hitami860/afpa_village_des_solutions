@@ -2,38 +2,35 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Partner;
+use App\Entity\Activities;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 
-class PartnerCrudController extends AbstractCrudController
+class ActivitiesCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Partner::class;
+        return Activities::class;
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
         return [
             TextField::new('name'),
             TextEditorField::new('description'),
-            TextField::new('logo'),
-            UrlField::new('website'),
-            AssociationField::new('categories')
-            ->setLabel('Catégory')
+            AssociationField::new('partner')
+            ->setLabel('Partner')
             ->setFormTypeOptions([
                 'by_reference' => true,
                 'multiple' => false,  
             ])
             ->setRequired(true)
+
         ];
     }
-    
+
 }
