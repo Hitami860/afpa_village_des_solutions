@@ -7,6 +7,7 @@ use App\Entity\Categories;
 use App\Entity\Interventions;
 use App\Entity\Partner;
 use App\Entity\Problematic;
+use App\Entity\Users;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -45,10 +46,10 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToCrud('Comptes', 'fas fa-list', Users::class);
         yield MenuItem::linkToCrud('Problematic', 'fas fa-list', Problematic::class);
         yield MenuItem::linkToCrud('Partner', 'fas fa-list', Partner::class);
         yield MenuItem::linkToCrud('Categories', 'fas fa-list', Categories::class);
-        yield MenuItem::linkToCrud('Interventions', 'fas fa-list', Interventions::class);
         yield MenuItem::linkToCrud('Activities', 'fas fa-list', Activities::class);
     }
 }

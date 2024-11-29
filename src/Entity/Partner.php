@@ -31,7 +31,7 @@ class Partner
     /**
      * @var Collection<int, Interventions>
      */
-    #[ORM\OneToMany(targetEntity: Interventions::class, mappedBy: 'partner')]
+    #[ORM\OneToMany(targetEntity: Interventions::class, mappedBy: 'partner', cascade:["persist", "remove"])]
     private Collection $interventions;
 
     public function __tostring() {
@@ -47,10 +47,17 @@ class Partner
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $website = null;
 
+    /**
+     * @var Collection<int, Users>
+     */
+    #[ORM\OneToMany(targetEntity: Users::class, mappedBy: 'partner')]
+    private Collection $users;
+
     public function __construct()
     {
         $this->interventions = new ArrayCollection();
         $this->activities = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -174,6 +181,36 @@ class Partner
     public function setWebsite(?string $website): static
     {
         $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Users>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(Users $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setPartner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Users $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getPartner() === $this) {
+                $user->setPartner(null);
+            }
+        }
 
         return $this;
     }
