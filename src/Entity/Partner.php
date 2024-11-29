@@ -31,7 +31,7 @@ class Partner
     /**
      * @var Collection<int, Interventions>
      */
-    #[ORM\OneToMany(targetEntity: Interventions::class, mappedBy: 'partner', cascade:["persist", "remove"])]
+    #[ORM\OneToMany(targetEntity: Interventions::class, mappedBy: 'partner',orphanRemoval:true , cascade:["persist", "remove"])]
     private Collection $interventions;
 
     public function __tostring() {

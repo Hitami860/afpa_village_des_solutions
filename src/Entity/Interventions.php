@@ -23,7 +23,7 @@ class Interventions
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\ManyToOne(inversedBy: 'interventions')]
+    #[ORM\ManyToOne(inversedBy: 'interventions', cascade:["remove"])]
     private ?Partner $partner = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
