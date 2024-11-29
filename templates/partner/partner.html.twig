@@ -1,29 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ partners.name }} - Village des solutions{% endblock %}
+{% block title %}{{ partner.name }} - Village des solutions{% endblock %}
 
 {% block body %}
 <div class="container mx-auto py-12 px-6">
 
-    <!-- Titre du partenaire -->
-    <h2 class="text-4xl font-semibold text-center text-gray-800 uppercase">{{ partners.name }}</h2>
-   
-    <!-- Logo du partenaire (si disponible) -->
-    {% if partners.logo %}
+    <h2 class="text-4xl font-semibold text-center text-gray-800 uppercase">{{ partner.name }}</h2>
+
+    {% if partner.logo %}
         <div class="flex justify-center mt-6">
-            <img src="{{ asset(partners.logo) }}" class="h-24" alt="Logo de {{ partners.name }}">
+            <img src="{{ asset(partner.logo) }}" class="h-24" alt="Logo de {{ partner.name }}">
         </div>
     {% endif %}
 
-    <!-- Description du partenaire -->
     <div class="mt-8 bg-gray-100 p-6 rounded-lg shadow-lg">
         <h3 class="text-2xl font-semibold text-gray-800">Présentation</h3>
         <p class="mt-4 text-gray-700">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut metus nec nulla tempor fringilla. Nulla facilisi. Integer sit amet magna nec purus aliquam tincidunt. Sed ut turpis auctor, ullamcorper libero at, auctor odio. Fusce fringilla orci vitae risus convallis, ac faucibus elit pellentesque. Nam ut nunc eget sapien efficitur sodales.
         </p>
     </div>
-
-    <!-- Activités du partenaire -->
     <div class="mt-8 bg-blue-50 p-6 rounded-lg shadow-lg">
         <h3 class="text-2xl font-semibold text-gray-800">Activités proposées</h3>
         <ul class="list-disc pl-6 mt-4 text-gray-700">
@@ -33,8 +28,6 @@
             <li>Nam ut nunc eget sapien efficitur sodales.</li>
         </ul>
     </div>
-
-    <!-- Horaires des interventions -->
     <div class="mt-8 bg-green-50 p-6 rounded-lg shadow-lg">
         <h3 class="text-2xl font-semibold text-gray-800">Dates et heures de ses interventions</h3>
         <table class="min-w-full mt-4 table-auto">
@@ -45,34 +38,36 @@
                     <th class="px-4 py-2 text-gray-800">Description</th>
                 </tr>
             </thead>
+            
             <tbody>
+            {% for intervention in interventions %}
                 <tr class="border-b border-gray-200">
-                    <td class="px-4 py-2 text-gray-700">1er Décembre 2024</td>
-                    <td class="px-4 py-2 text-gray-700">10:00 - 12:00</td>
-                    <td class="px-4 py-2 text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                    <td class="px-4 py-2 text-gray-700">{{ intervention.date|date('d F Y') }}</td>
+                    <td class="px-4 py-2 text-gray-700">{{ intervention.date|date('H:i') }} - 
+                        {% if intervention.enddate %}
+                            {{ intervention.enddate|date('H:i') }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td class="px-4 py-2 text-gray-700">{{ intervention.description ?: 'Aucune description disponible.' }}</td>
                 </tr>
-                <tr class="border-b border-gray-200">
-                    <td class="px-4 py-2 text-gray-700">5 Décembre 2024</td>
-                    <td class="px-4 py-2 text-gray-700">14:00 - 16:00</td>
-                    <td class="px-4 py-2 text-gray-700">Fusce fringilla orci vitae risus convallis, ac faucibus elit pellentesque.</td>
-                </tr>
+            {% else %}
                 <tr>
-                    <td class="px-4 py-2 text-gray-700">10 Décembre 2024</td>
-                    <td class="px-4 py-2 text-gray-700">09:00 - 11:00</td>
-                    <td class="px-4 py-2 text-gray-700">Nam ut nunc eget sapien efficitur sodales.</td>
+                    <td colspan="3" class="px-4 py-2 text-gray-700 text-center">Aucune intervention prévue.</td>
                 </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
 
-    {% if partners.website %}
-<div class="flex justify-center pt-5">
-<a href="{{partners.website}}">
-<button class="border bg-orange-500 text-white rounded-lg  px-[2%] font-semibold border-white hover:bg-orange-400">Visiter le site du partenaire  >></button>
-</a>
-</div>
-{% endif %}
+    {% if partner.website %}
+    <div class="flex justify-center pt-5">
+        <a href="{{ partner.website }}">
+            <button class="border bg-orange-500 text-white rounded-lg px-[2%] font-semibold border-white hover:bg-orange-400">Visiter le site du partenaire  >></button>
+        </a>
+    </div>
+    {% endif %}
 
 </div>
 {% endblock %}
-

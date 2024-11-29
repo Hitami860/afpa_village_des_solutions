@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Interventions;
 use App\Entity\Partner;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,14 +24,16 @@ class PartnerController extends AbstractController
     #[Route('/partner/{id}', name: 'app_partner')]
     public function partnerid($id, EntityManagerInterface $entity): Response
     {
-        $partner = $entity->getRepository(Partner::class)->findAll();
-        $partners = $entity->getRepository(Partner::class)->findOneBy(['id' => $id]);
+        
+        // $partner = $entity->getRepository(Partner::class)->findAll();
+        $partner = $entity->getRepository(Partner::class)->findOneBy(['id' => $id]);
+        $interventions = $entity->getRepository(Interventions::class)->findBy(['partner' => $partner]);
         return $this->render('partner/partner.html.twig', [
             'controller_name' => 'PartnerController',
             'id' => $id,
-            'partners' => $partners,
-            'partner'=> $partner,
-
+            'partner' => $partner,
+            // 'partner'=> $partner,
+            'interventions'=> $interventions,
         ]);
     }
 }
