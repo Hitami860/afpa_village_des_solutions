@@ -33,7 +33,7 @@ class PartnerController extends AbstractController
             'id' => $id,
             'partner' => $partner,
             // 'partner'=> $partner,
-            'interventions'=> $interventions,
+            'interventions'=> $interventions, 
         ]);
     }
 }
