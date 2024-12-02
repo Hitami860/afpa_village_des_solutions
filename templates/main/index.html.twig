@@ -216,7 +216,9 @@
     <div class="flex justify-center gap-2">
         {% for partnerlogo in partner %}
             {% if partnerlogo.logo %}
+            <a href="{{path('app_partner', {id: partnerlogo.id})}}">
                 <img src="{{ asset(partnerlogo.logo) }}" class="h-16" alt="Logo">
+            </a>
             {% endif %}
         {% endfor %}
     </div>
