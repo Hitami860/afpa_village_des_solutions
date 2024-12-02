@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion - Village Afpa{% endblock %}
+
+{% block body %}
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+<div class="mt-[300px]">
+    <h1 class="h3 mb-3 font-weight-normal text-2xl font-semibold uppercase text-orange-500 text-center">Connexion</h1>
+    <p class="pt-2 pb-5 text-center font-semibold">Vous êtes partenaire de l'Afpa au sein du Village de Châtellerault ? Identifiez-vous ci-dessous :</p>
+    <div class="flex flex-col items-center justify-center">
+    <label for="inputAccountNumber" class="font-semibold ">Identifiant de compte :</label>
+    <input type="text" value="{{ last_username }}" name="accountNumber" id="inputAccountNumber" class="form-control rounded-lg" autocomplete="accountNumber" required autofocus>
+    <label for="inputPassword"  class="font-semibold ">Mot de passe :</label>
+    <input type="password" name="password" id="inputPassword" class="form-control rounded-lg" autocomplete="current-password" required>
+    </div>
+    <div class="flex flex-col items-center justify-center pt-4 pb-[13%]">
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" name="_remember_me"> Se souvenir de moi
+        </label>
+    </div>
+
+
+    <button class="btn btn-lg btn-primary border bg-orange-500 rounded-lg text-white px-5 py-2 hover:bg-orange-600" type="submit">
+        Connexion
+    </button>
+    </div>
+</form>
+</div>
+{% endblock %}
