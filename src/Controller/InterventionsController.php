@@ -38,6 +38,8 @@ class InterventionsController extends AbstractController
             $this->entityManagerInterface->persist($intervention);
             $this->entityManagerInterface->flush();
 
+            $this->addFlash("success", "Ajout de l'intervention réussit !");
+
         }
 
         return $this->render('interventions/interventions.html.twig', [
@@ -61,6 +63,8 @@ class InterventionsController extends AbstractController
 
         $this->entityManagerInterface->remove($interventions);
         $this->entityManagerInterface->flush();
+
+        $this->addFlash("delete", "Suppression de l'intervention réussit !");
 
 
         return $this->redirectToRoute('app_interventions', [

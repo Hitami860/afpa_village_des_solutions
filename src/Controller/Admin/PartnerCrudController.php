@@ -34,7 +34,8 @@ class PartnerCrudController extends AbstractCrudController
                 'multiple' => false,  
             ])
             ->setRequired(true),
-            CollectionField::new('interventions')->useEntryCrudForm(InterventionsCrudController::class)->allowDelete()
+            CollectionField::new('interventions')->useEntryCrudForm(InterventionsCrudController::class)->allowDelete(),
+            CollectionField::new('activities')->useEntryCrudForm(ActivitiesCrudController::class)->allowDelete()
         ];
     }
     

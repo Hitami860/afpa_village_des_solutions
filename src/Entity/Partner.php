@@ -41,7 +41,7 @@ class Partner
     /**
      * @var Collection<int, Activities>
      */
-    #[ORM\OneToMany(targetEntity: Activities::class, mappedBy: 'partner')]
+    #[ORM\OneToMany(targetEntity: Activities::class, mappedBy: 'partner',orphanRemoval:true , cascade:["persist", "remove"])]
     private Collection $activities;
 
     #[ORM\Column(length: 255, nullable: true)]

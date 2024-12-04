@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Activities;
 use App\Entity\Interventions;
 use App\Entity\Partner;
 use App\Form\PartnerType;
+use App\Repository\ActivitiesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,12 +32,14 @@ class PartnerController extends AbstractController
         // $partner = $entity->getRepository(Partner::class)->findAll();
         $partner = $entity->getRepository(Partner::class)->findOneBy(['id' => $id]);
         $interventions = $entity->getRepository(Interventions::class)->findBy(['partner' => $partner]);
+        $activities = $entity->getRepository(Activities::class)->findBy(['partner' => $partner]);
         return $this->render('partner/partner.html.twig', [
             'controller_name' => 'PartnerController',
             'id' => $id,
             'partner' => $partner,
             // 'partner'=> $partner,
-            'interventions'=> $interventions, 
+            'interventions'=> $interventions,
+            'activities'=>$activities
         ]);
     }
 
