@@ -1,43 +1,87 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Planification des interventions
+{% endblock %}
 
 {% block body %}
-<section class="pt-[6%]">
-<h1 class="text-xl text-center font-semibold">Planifier une interventions</h1>
+	<section class="pt-[13%] pb-8 bg-gray-100">
+		<div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
+			<h1 class="text-2xl text-center font-semibold text-gray-800 mb-6">Planifier une intervention</h1>
 
-{{form_start(form)}}
+			{{ form_start(form) }}
 
-{{form_row(form.title)}}
-{{form_row(form.date, {
-    'label': 'Debut',
-}) }}
-{{form_row(form.enddate, {
-    'label': 'Fin',
-}) }}
-{{form_row(form.description)}}
+			<div class="mb-6">
+				{{ form_row(form.title, {
+              'label': 'Titre',
+                'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300'}
+            }) }}
+			</div>
 
-<button type="submit" class="border bg-green-300 rounded-lg text-white px-3 py-3">Ajouter l'intervention</button>
+			<div class="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+				{{ form_row(form.date, {
+                'label': 'Début',
+                'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-300'}
+            }) }}
+				{{ form_row(form.enddate, {
+                'label': 'Fin',
+                'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-300'}
+            }) }}
+			</div>
 
-{{form_end(form)}}
+			<div class="mb-6">
+				{{ form_row(form.description, {
+                'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300'}
+            }) }}
+			</div>
 
-</section>
+			<div class="text-center">
+				<button type="submit" class="w-full bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">Ajouter l'intervention</button>
+			</div>
 
+			{{ form_end(form) }}
+		</div>
+	</section>
 
-<section>
-<h1 class="text-xl text-center font-semibold pb-5">Vos interventions</h1>
+	<section class="bg-gray-50 py-12">
+		<div class="max-w-4xl mx-auto">
+			<h1 class="text-2xl text-center font-semibold text-gray-800 mb-6">Vos interventions</h1>
 
-<div class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
-  <div class="p-4">
-    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
-      Website Review Check Text
-    </h5>
-    <p class="text-slate-600 leading-normal font-light">
-      The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to Naviglio where you can enjoy the main night life in Barcelona.
-    </p>
-  </div>
-</div>
+			{% if interventions is not empty %}
+				<div class="space-y-6">
+					{% for intervention in interventions %}
+						<div class="bg-white shadow-lg rounded-lg border border-gray-200">
+							<div class="p-6">
+								<h5 class="text-xl font-semibold text-gray-800 mb-2">{{ intervention.title }}</h5>
+								<p class="text-gray-600 mb-4">{{ intervention.description ? intervention.description : 'Aucune description' }}</p>
 
-</section>
+								<p class="text-gray-600 text-sm">
+									<strong>Date :</strong>
+									{{ intervention.date ? intervention.date|date('d-m-Y') : 'Non définie' }}
+								</p>
+								<p class="text-gray-600 text-sm">
+									<strong>Heure :</strong>
+									{{ intervention.date ? intervention.date|date('H:i') : 'Non définie' }}
+									{% if intervention.enddate %}
+										-
+										{{ intervention.enddate|date('H:i') }}
+									{% endif %}
+								</p>
+								<a href="{{path("app_delete", {id: intervention.id})}}">
+									<button class="rounded-full group flex items-center justify-center focus-within:outline-red-500">
+										<svg width="34" height="34" viewbox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<circle class="fill-red-50 transition-all duration-500 group-hover:fill-red-400" cx="17" cy="17" r="17" fill=""/>
+											<path class="stroke-red-500 transition-all duration-500 group-hover:stroke-white" d="M14.1673 13.5997V12.5923C14.1673 11.8968 14.7311 11.333 15.4266 11.333H18.5747C19.2702 11.333 19.834 11.8968 19.834 12.5923V13.5997M19.834 13.5997C19.834 13.5997 14.6534 13.5997 11.334 13.5997C6.90804 13.5998 27.0933 13.5998 22.6673 13.5997C21.5608 13.5997 19.834 13.5997 19.834 13.5997ZM12.4673 13.5997H21.534V18.8886C21.534 20.6695 21.534 21.5599 20.9807 22.1131C20.4275 22.6664 19.5371 22.6664 17.7562 22.6664H16.2451C14.4642 22.6664 13.5738 22.6664 13.0206 22.1131C12.4673 21.5599 12.4673 20.6695 12.4673 18.8886V13.5997Z" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round"/>
+										</svg>
+									</button>
+								</a>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			{% else %}
+				<p class="text-center text-gray-500">Aucune intervention planifiée</p>
+			{% endif %}
+		</div>
+	</section>
 
 {% endblock %}

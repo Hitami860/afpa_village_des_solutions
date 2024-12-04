@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Interventions;
 use App\Entity\Partner;
 use App\Form\InterventionsType;
+use App\Repository\InterventionsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -28,6 +29,10 @@ class InterventionsController extends AbstractController
         $form = $this->createForm(InterventionsType::class, $intervention);
         $form->handleRequest($request);
 
+        $partner = $this->getUser()->getPartner();
+        $interventions = $partner->getInterventions();
+
+
         if($form->isSubmitted() && $form->isValid()){
             $intervention->setPartner($this->getUser()->getPartner());
             $this->entityManagerInterface->persist($intervention);
@@ -37,7 +42,31 @@ class InterventionsController extends AbstractController
 
         return $this->render('interventions/interventions.html.twig', [
             'controller_name' => 'InterventionsController',
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'interventions'=>$interventions
         ]);
     }
+
+    #[Route('/delete/{id}', name: 'app_delete')]
+    public function deleteIntervention($id, EntityManagerInterface $entityManagerInterface): Response
+    {
+        
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $partner = $this->getUser()->getPartner();
+        $interventions = $partner->getInterventions();
+        $interventions = $entityManagerInterface->getRepository(Interventions::class)->find($id);
+
+        $interventions->setPartner(null);
+
+        $this->entityManagerInterface->remove($interventions);
+        $this->entityManagerInterface->flush();
+
+
+        return $this->redirectToRoute('app_interventions', [
+            'controller_name' => 'InterventionsController',
+            'interventions'=>$interventions,
+        ]);
+    }
+    
 }
