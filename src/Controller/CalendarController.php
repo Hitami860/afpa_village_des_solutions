@@ -44,6 +44,7 @@ class CalendarController extends AbstractController
                 "title" => $interventions->getPartner()->getName(),
                 "start" => $interventions->getDate(),
                 "end" => $interventions->getEnddate(),
+                "description" => $interventions->getDescription(),
             ];
         }
 
