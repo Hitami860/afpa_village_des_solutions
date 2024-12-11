@@ -23,6 +23,10 @@ class Activities
     #[ORM\ManyToOne(inversedBy: 'activities')]
     private ?Partner $partner = null;
 
+    public function __tostring() {
+        return $this->name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

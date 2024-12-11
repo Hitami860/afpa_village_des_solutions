@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer le profil -
+	{{app.user.partner.name}}
+{% endblock %}
+
+{% block body %}
+
+	<h2 class="text-xl font-semibold pt-[5%] text-center">Modifier les informations de votre profil</h2>
+
+	{{ form_start(form) }}
+
+
+    <div class="mb-6">
+		{{ form_row(form.name, {
+              'label': 'Nom',
+                'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300'}
+            }) }}
+	</div>
+	<div class="mb-6">
+		{{ form_row(form.description, {
+              'label': 'Description',
+                'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300'}
+            }) }}
+	</div>
+	<div class="mb-6">
+		{{ form_row(form.website, {
+              'label': 'Site Web',
+                'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300'}
+            }) }}
+	</div>
+    <div class="mb-6">
+		{{ form_row(form.logo, {
+              'label': 'Logo entreprise',
+                'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300'}
+            }) }}
+	</div>
+    {# <div class="mb-6">
+		{{ form_row(form.email, {
+              'label': 'Email',
+                'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300'}
+            }) }}
+	</div> #}
+
+    {# <h3>Ajouter des activités</h3>
+    <div class="mb-6">
+		{{ form_row(form.activities)}}
+	</div> #}
+
+<button type="submit" class="rounded-lg bg-blue-600 w-[10%] text-white">Mettre à jour</button>
+	{{ form_end(form) }}
+
+
+{% endblock %}
