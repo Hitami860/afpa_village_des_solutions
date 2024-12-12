@@ -35,7 +35,7 @@ class PartnerController extends AbstractController
         $interventions = $entity->getRepository(Interventions::class)->findBy(['partner' => $partner]);
         $activities = $entity->getRepository(Activities::class)->findBy(['partner' => $partner]);
 
-        $partner = $this->getUser()->getPartner();
+        // $partner = $this->getUser()->getPartner();
         $interventions = $partner->getInterventions();
 
         $interv = $paginatorInterface->paginate(
