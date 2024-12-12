@@ -181,22 +181,30 @@
     <div class="container mx-auto px-6 grid grid-cols-3 gap-6">
         {% for category in categories %}
             {% set color = '' %}
+            {% set icon = '' %}
             {% if category.name == 'Logement' %}
                 {% set color = '[#005098]' %}
+                {% set icon = 'iconhome.png' %}
             {% elseif category.name == 'Numérique' %}
                 {% set color = '[#a5a5a5]' %}
+                {% set icon = 'iconcomputer.png' %}
             {% elseif category.name == 'Parentalité' %}
                 {% set color = '[#8dcfb1]' %}
+                {% set icon = 'iconparenthood.png' %}
             {% elseif category.name == 'Santé' %}
                 {% set color = '[#b90f5f]' %}
+                {% set icon = 'iconhealth.png' %}
             {% elseif category.name == 'Mobilité' %}
                 {% set color = '[#ea5b0c]' %}
+                {% set icon = 'iconmobility.png' %}
             {% elseif category.name == 'Marqueurs différenciants/Autre' %}
                 {% set color = '[#169d9d]' %}
+                {% set icon = 'iconother.png' %}
             {% endif %}
 
             <div class="flex flex-col bg-white border shadow-sm rounded-xl shadow-xl hover:shadow-2xl">
-                <div class="bg-{{color}} border-b rounded-t-xl py-3 px-4">
+                <div class="bg-{{color}} border-b rounded-t-xl py-3 px-4 flex flex-row items-center gap-2">
+                    <img src="{{asset('images/' ~ icon)}}" class="h-7" alt="logo de {{category.name}}">
                     <p class="text-sm font-semibold text-white">{{category.name}}</p>
                 </div>
                 <div class="p-4">
