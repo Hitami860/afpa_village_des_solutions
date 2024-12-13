@@ -26,7 +26,7 @@
 					<label for="inputPassword" class="font-semibold text-lg ">Mot de passe :</label>
 					<input type="password" name="password" id="inputPassword" class="form-control rounded-lg" autocomplete="current-password" required>
 				</div>
-				<div class="flex flex-col items-center justify-center pt-4 pb-[13%]">
+				<div class="flex flex-col items-center justify-center py-4">
 					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 					<div class="checkbox mb-3">
@@ -38,11 +38,15 @@
 					<button class="btn btn-lg btn-primary border bg-orange-500 rounded-lg text-white px-5 py-2 hover:bg-orange-600" type="submit">
 						Connexion
 					</button>
-						<div class="pt-[5%]">
-							<a href="#"><button class="text-orange-500 text-sm pt-3">Mot de passe oublié ?</button></a>
-						</div>
+
+				</div>
+				<div class="text-center py-6">
+					<a href="{{path('app_forgot_password_request')}}" class="text-orange-500 text-sm pt-3">
+						Mot de passe oublié ?
+					</a>
 				</div>
 			</div>
-		</form>
-	</div>
+		</div>
+	</form>
+
 {% endblock %}
